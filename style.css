@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #b39090;
+    text-align: center;
+}
+
+h1 {
+    color: hsl(0, 23%, 12%);
+    font-size: 50px;
+}
+
+h2 {
+    color: hsl(0, 23%, 12%);
+    font-size: 30px;
+}
+
+p {
+    color: hsl(0, 23%, 12%);
+    font-size: 20px;
+}
+
+nav {
+    background-color: hsl(0, 23%, 12%);
+}
