@@ -56,11 +56,13 @@ nav a:hover {
     font-size: 18px;
 }
 
-.projects {
+.project {
     background-color: hsl(0, 2%, 56%);
     color: rgb(98, 96, 104);
     padding: 20px;
     margin-top: 20px;
     border-radius: 10px;
 }
+
+
 
