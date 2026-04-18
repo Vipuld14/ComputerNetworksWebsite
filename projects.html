@@ -6,6 +6,7 @@
     <title>Vipul Dhotre - Computer Science Student</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
 </head>
 
 <body>
@@ -26,20 +27,27 @@
 </section>
 
 <script>
-    const supabase = window.supabase.createClient(
+    const supabaseClient = window.supabase.createClient(
         "https://ernuqgqeeghqplrrpiah.supabase.co",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVybnVxZ3FlZWdocXBscnJwaWFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MDEyNDIsImV4cCI6MjA5MjA3NzI0Mn0.Ilo8nbkT0KqGZPOBoh0RfV65WsF2dwFgDEFZsLcdvfE"
     );
 
 
     async function loadProjects() {
-        const { data, error } = await supabase.from("projects").select("*");
+        const { data, error } = await supabaseClient.from("projects").select("*");
         if (error) {
             console.error("Error fetching projects:", error);
             return;
         }
+
         const projectsSection = document.querySelector(".Context");
         data.forEach(project => {
+
+            const title = DOMPurify.sanitize(project.title);
+            const description = DOMPurify.sanitize(project.description);
+            const tech_stack = DOMPurify.sanitize(project.tech_stack);
+            const github_link = DOMPurify.sanitize(project.github_link);
+
             const projectElement = document.createElement("div");
             projectElement.classList.add("project");
             projectElement.innerHTML = `
