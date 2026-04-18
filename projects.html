@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vipul Dhotre - Computer Science Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<header>
+    <h1>My Projects</h1>
+    <p> Loaded using a DB System</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="networking.html">Networking</a>
+    <a href="projects.html">Projects</a>
+</nav>
+
+<section class="Context">
+    <h2>Projects</h2>
+</section>
+
+<script>
+    const supabase = window.supabase.createClient(
+        "https://ernuqgqeeghqplrrpiah.supabase.co",
+        "sb_publishable_uskw_mQ5y0wIwrd3fQZi3Q_wjVVtWDa"
+    );
+
+
+    async function loadProjects() {
+        const { data, error } = await supabase.from("projects").select("*");
+        if (error) {
+            console.error("Error fetching projects:", error);
+            return;
+        }
+        const projectsSection = document.querySelector(".Context");
+        data.forEach(project => {
+            const projectElement = document.createElement("div");
+            projectElement.classList.add("project");
+            projectElement.innerHTML = `
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <a href="${project.github_link}">View Project</a>
+            `;
+            projectsSection.appendChild(projectElement);
+        });
+        
+    }
+</script>
